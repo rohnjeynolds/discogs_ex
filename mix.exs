@@ -19,10 +19,10 @@ defmodule DiscogsEx.Mixfile do
       ],
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
-        "coveralls": :test,
+        coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.html": :test,
-        "vcr": :test,
+        vcr: :test,
         "vcr.delete": :test,
         "vcr.check": :test,
         "vcr.show": :test,
