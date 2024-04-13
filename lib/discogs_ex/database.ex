@@ -40,7 +40,8 @@ defmodule DiscogsEx.Database do
 
   @spec get_artist_releases(any(), any()) :: none()
   def get_artist_releases(artist_id, params \\ %{}, client \\ %Client{}) do
-    get "/artists/#{artist_id}/releases", client, params, [timeout: 1000*60*5, recv_timeout: 1000*60*5]
+    # get "/artists/#{artist_id}/releases", client, params, [timeout: 1000*60*5, recv_timeout: 1000*60*5]
+    get "/artists/#{artist_id}/releases", client, params
   end
 
   defp merge_query_and_params(q, params) do
