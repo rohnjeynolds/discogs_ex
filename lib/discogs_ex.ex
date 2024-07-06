@@ -32,6 +32,10 @@ defmodule DiscogsEx do
     json_request(method, url, body, get_header(auth), options)
   end
 
+  def request(method, url, body, headers, options) do
+    json_request(method, url, body, headers, options)
+  end
+
   def json_request(method, url, body \\ "", headers \\ [], options \\ []) do
     raw_request(method, url, JSX.encode!(body), headers, options)
   end
