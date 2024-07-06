@@ -28,7 +28,7 @@ defmodule DiscogsEx do
     |> process_response
   end
 
-  def request(method, url, auth, body \\ "", options \\ []) do
+  def request(method, url, auth, body \\ "", options \\ []) when is_struct(auth, Client) do
     json_request(method, url, body, get_header(auth), options)
   end
 
