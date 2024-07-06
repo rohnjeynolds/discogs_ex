@@ -24,18 +24,16 @@ defmodule DiscogsEx do
 
   def raw_request(method, url, body \\ "", headers \\ [], options \\ []) do
     method
-    |> request!(url, body, headers, options)
+    |> request!(url, headers, body, options)
     |> process_response
   end
 
-  def request(method, url, auth, body \\ "", options \\ []) when is_struct(auth, Client) do
-    IO.inspect("auth is passed", label: "REQUEST")
-    json_request(method, url, body, get_header(auth), options)
+  def request(method, url, auth_or_headers, body \\ "", options \\ [])
+  def request(method, url, auth_or_headers, body, options) when is_struct(auth_or_headers, Client) do
+    json_request(method, url, body, get_header(auth_or_headers), options)
   end
-
-  def request(method, url, body, headers, options) do
-    IO.inspect("auth is NOT passed", label: "REQUEST")
-    json_request(method, url, body, headers, options)
+  def request(method, url, auth_or_headers, body, options) do
+    json_request(method, url, body, auth_or_headers, options)
   end
 
   def json_request(method, url, body \\ "", headers \\ [], options \\ []) do
