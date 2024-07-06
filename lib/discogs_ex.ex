@@ -29,10 +29,12 @@ defmodule DiscogsEx do
   end
 
   def request(method, url, auth, body \\ "", options \\ []) when is_struct(auth, Client) do
+    IO.inspect("auth is passed", label: "REQUEST")
     json_request(method, url, body, get_header(auth), options)
   end
 
   def request(method, url, body, headers, options) do
+    IO.inspect("auth is NOT passed", label: "REQUEST")
     json_request(method, url, body, headers, options)
   end
 
