@@ -24,16 +24,12 @@ defmodule DiscogsEx do
 
   def raw_request(method, url, body \\ "", headers \\ [], options \\ []) do
     method
-    |> request!(url, headers, body, options)
+    |> request!(url, body, headers, options)
     |> process_response
   end
 
-  def request(method, url, auth_or_headers, body \\ "", options \\ [])
-  def request(method, url, auth_or_headers, body, options) when is_struct(auth_or_headers, Client) do
-    json_request(method, url, body, get_header(auth_or_headers), options)
-  end
-  def request(method, url, auth_or_headers, body, options) do
-    json_request(method, url, body, auth_or_headers, options)
+  def request(method, url, auth, body \\ "") do
+    json_request(method, url, body, get_header(auth))
   end
 
   def json_request(method, url, body \\ "", headers \\ [], options \\ []) do
@@ -43,13 +39,13 @@ defmodule DiscogsEx do
   @doc """
   GET request to the Discogs API.
   """
-  def get(path, client, params \\ [], options \\ []) do
+  def get(path, client, params \\ []) do
     url =
       client
       |> url(path)
       |> add_params_to_url(params)
 
-    :get |> request(url, client.auth, "", options)
+    :get |> request(url, client.auth)
   end
 
   def delete(path, client, body \\ "") do
