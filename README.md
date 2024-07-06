@@ -1,6 +1,7 @@
 # DiscogsEx
 
 An Elixir library for Discogs API 2.0.
+This is a non-production-ready, experimental fork of https://github.com/mager/discogs_ex.
 
 ### Endpoints
 
