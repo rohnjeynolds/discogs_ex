@@ -28,8 +28,8 @@ defmodule DiscogsEx do
     |> process_response
   end
 
-  def request(method, url, auth, body \\ "") do
-    json_request(method, url, body, get_header(auth))
+  def request(method, url, auth, body \\ "", options \\ []) do
+    json_request(method, url, body, get_header(auth), options)
   end
 
   def json_request(method, url, body \\ "", headers \\ [], options \\ []) do
@@ -39,13 +39,13 @@ defmodule DiscogsEx do
   @doc """
   GET request to the Discogs API.
   """
-  def get(path, client, params \\ []) do
+  def get(path, client, params \\ [], options \\ []) do
     url =
       client
       |> url(path)
       |> add_params_to_url(params)
 
-    :get |> request(url, client.auth)
+    :get |> request(url, client.auth, "", options)
   end
 
   def delete(path, client, body \\ "") do
