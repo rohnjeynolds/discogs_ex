@@ -28,7 +28,7 @@ defmodule DiscogsEx do
     |> process_response
   end
 
-  def request(method, url, auth, body \\ "", options \\ []) do
+  def discogs_request(method, url, auth, body \\ "", options \\ []) do
     json_request(method, url, body, get_header(auth), options)
   end
 
@@ -45,11 +45,11 @@ defmodule DiscogsEx do
       |> url(path)
       |> add_params_to_url(params)
 
-    :get |> request(url, client.auth, "", options)
+    :get |> discogs_request(url, client.auth, "", options)
   end
 
   def delete(path, client, body \\ "") do
-    request(:delete, url(client, path), client.auth, body)
+    discogs_request(:delete, url(client, path), client.auth, body)
   end
 
   def post(path, client, params, body \\ "") do
@@ -58,15 +58,15 @@ defmodule DiscogsEx do
       |> url(path)
       |> add_params_to_url(params)
 
-    :post |> request(url, client.auth, body)
+    :post |> discogs_request(url, client.auth, body)
   end
 
   def patch(path, client, body \\ "") do
-    request(:patch, url(client, path), client.auth, body)
+    discogs_request(:patch, url(client, path), client.auth, body)
   end
 
   def put(path, client, body \\ "") do
-    request(:put, url(client, path), client.auth, body)
+    discogs_request(:put, url(client, path), client.auth, body)
   end
 
   @doc """
