@@ -46,6 +46,10 @@ defmodule DiscogsEx.Database do
     # get "/artists/#{artist_id}/releases", client, params
   end
 
+  def get_release(release_id, params \\ %{curr_abbr: "USD"}, client \\ %Client{}) do
+    get "/releases/#{release_id}", client, params
+  end
+
   defp merge_query_and_params(q, params) do
     Map.merge(%{q: q}, params)
   end
