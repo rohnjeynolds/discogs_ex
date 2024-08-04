@@ -39,11 +39,8 @@ defmodule DiscogsEx.Database do
   end
 
   @spec get_artist_releases(any(), any()) :: none()
-  def get_artist_releases(artist_id, params \\ %{}, client \\ %Client{}) do
-    timeout = 1000*60*5
-    options = [timeout: timeout, recv_timeout: timeout]
+  def get_artist_releases(artist_id, params \\ %{}, options \\ [], client \\ %Client{}) do
     get "/artists/#{artist_id}/releases", client, params, options
-    # get "/artists/#{artist_id}/releases", client, params
   end
 
   def get_release(release_id, params \\ %{curr_abbr: "USD"}, client \\ %Client{}) do
