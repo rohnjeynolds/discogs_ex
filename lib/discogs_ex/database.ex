@@ -38,6 +38,15 @@ defmodule DiscogsEx.Database do
     get "database/search", client, q |> merge_query_and_params(params)
   end
 
+  @spec get_artist_releases(any(), any()) :: none()
+  def get_artist_releases(artist_id, params \\ %{}, options \\ [], client \\ %Client{}) do
+    get "/artists/#{artist_id}/releases", client, params, options
+  end
+
+  def get_release(release_id, params \\ %{curr_abbr: "USD"}, client \\ %Client{}) do
+    get "/releases/#{release_id}", client, params
+  end
+
   defp merge_query_and_params(q, params) do
     Map.merge(%{q: q}, params)
   end
